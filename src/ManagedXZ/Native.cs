@@ -31,11 +31,11 @@ namespace ManagedXZ
                 throw new Exception(arch + " is not supported yet");
 
             // try load library. todo: embed native dlls as resource?
-            var thisdir = Assembly.GetExecutingAssembly().Location;
+            var thisdir = AppDomain.CurrentDomain.BaseDirectory + "bin";
             dllFilename = Path.Combine(Path.GetDirectoryName(thisdir), dllFilename);
             _handle = LoadLibrary(dllFilename);
             if (_handle == IntPtr.Zero)
-                throw new Exception("can not load " + dllFilename);
+                throw new Exception("Can not load " + dllFilename);
 
             // get function pointers
             lzma_code = GetFunction<lzma_code_delegate>("lzma_code");
